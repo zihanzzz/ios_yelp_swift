@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ed2-2U-J31">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="ed2-2U-J31">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,23 +21,23 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dJS-VD-Dia">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BusinessCell" rowHeight="140" id="nxx-dC-OUC" customClass="BusinessCell" customModule="Yelp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="375" height="140"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BusinessCell" rowHeight="131" id="nxx-dC-OUC" customClass="BusinessCell" customModule="Yelp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="375" height="131"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nxx-dC-OUC" id="KyV-v8-lv1">
-                                            <frame key="frameInset" width="375" height="139"/>
+                                            <frame key="frameInset" width="375" height="130.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wVC-Pl-F2Z">
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="65" id="KLS-Vm-w4t"/>
-                                                        <constraint firstAttribute="width" constant="65" id="Nvd-GC-YTn"/>
+                                                        <constraint firstAttribute="height" constant="65" id="Fb9-eu-5xq"/>
+                                                        <constraint firstAttribute="width" constant="65" id="kif-pK-l6y"/>
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4NS-dZ-C6g">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="83" id="0oW-Vw-Dsj"/>
-                                                        <constraint firstAttribute="height" constant="15" id="Hex-Rf-1Pl"/>
+                                                        <constraint firstAttribute="height" constant="15" id="81W-28-AB1"/>
+                                                        <constraint firstAttribute="width" constant="83" id="eES-2V-Wdw"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="1. Grand Pu Bah" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rJo-6B-PCy">
@@ -73,26 +72,26 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="obD-ky-OXi" secondAttribute="trailing" constant="8" id="3AZ-bB-CBz"/>
-                                                <constraint firstItem="HSQ-2e-Uxu" firstAttribute="leading" secondItem="wVC-Pl-F2Z" secondAttribute="trailing" constant="8" id="A01-7g-F0x"/>
-                                                <constraint firstAttribute="trailing" secondItem="CRP-ky-wiu" secondAttribute="trailing" constant="8" id="DYG-du-zHB"/>
-                                                <constraint firstItem="3gq-Ic-9BY" firstAttribute="centerY" secondItem="4NS-dZ-C6g" secondAttribute="centerY" id="H5a-0F-q3n"/>
-                                                <constraint firstItem="HSQ-2e-Uxu" firstAttribute="top" secondItem="4NS-dZ-C6g" secondAttribute="bottom" constant="4" id="HmE-E6-RrM"/>
-                                                <constraint firstItem="obD-ky-OXi" firstAttribute="top" secondItem="KyV-v8-lv1" secondAttribute="top" constant="8" id="NS7-Hx-1bU"/>
-                                                <constraint firstItem="CRP-ky-wiu" firstAttribute="top" secondItem="obD-ky-OXi" secondAttribute="bottom" constant="8" id="OmA-AC-yXl"/>
-                                                <constraint firstItem="wVC-Pl-F2Z" firstAttribute="top" secondItem="KyV-v8-lv1" secondAttribute="top" constant="8" id="RPf-DG-5ra"/>
-                                                <constraint firstItem="rJo-6B-PCy" firstAttribute="top" secondItem="KyV-v8-lv1" secondAttribute="top" constant="8" id="Y1O-lm-izW"/>
-                                                <constraint firstItem="fJO-yd-mhi" firstAttribute="leading" secondItem="HSQ-2e-Uxu" secondAttribute="leading" id="aGp-0v-IoT"/>
-                                                <constraint firstItem="3gq-Ic-9BY" firstAttribute="leading" secondItem="4NS-dZ-C6g" secondAttribute="trailing" constant="8" id="hpA-vu-yEK"/>
-                                                <constraint firstItem="4NS-dZ-C6g" firstAttribute="top" secondItem="rJo-6B-PCy" secondAttribute="bottom" constant="8" id="j1h-FO-gbU"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="HSQ-2e-Uxu" secondAttribute="trailing" constant="8" id="mvD-5M-X5u"/>
-                                                <constraint firstItem="4NS-dZ-C6g" firstAttribute="leading" secondItem="wVC-Pl-F2Z" secondAttribute="trailing" constant="8" id="qaJ-Xz-zlr"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wVC-Pl-F2Z" secondAttribute="bottom" priority="999" constant="12" id="qkk-1v-yvA"/>
-                                                <constraint firstItem="fJO-yd-mhi" firstAttribute="top" secondItem="HSQ-2e-Uxu" secondAttribute="bottom" constant="4" id="uJq-hA-pP0"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="fJO-yd-mhi" secondAttribute="bottom" constant="12" id="xSQ-Si-fOU"/>
-                                                <constraint firstItem="wVC-Pl-F2Z" firstAttribute="leading" secondItem="KyV-v8-lv1" secondAttribute="leading" constant="8" id="xsX-IZ-r6e"/>
-                                                <constraint firstItem="obD-ky-OXi" firstAttribute="leading" secondItem="rJo-6B-PCy" secondAttribute="trailing" constant="8" id="yxM-qG-0f6"/>
-                                                <constraint firstItem="rJo-6B-PCy" firstAttribute="leading" secondItem="wVC-Pl-F2Z" secondAttribute="trailing" constant="8" id="zQD-tZ-9qm"/>
+                                                <constraint firstAttribute="trailing" secondItem="CRP-ky-wiu" secondAttribute="trailing" constant="8" id="8KU-wP-6aU"/>
+                                                <constraint firstItem="fJO-yd-mhi" firstAttribute="leading" secondItem="HSQ-2e-Uxu" secondAttribute="leading" id="BRE-gg-BoM"/>
+                                                <constraint firstItem="3gq-Ic-9BY" firstAttribute="leading" secondItem="4NS-dZ-C6g" secondAttribute="trailing" constant="8" id="CR6-a5-5Yq"/>
+                                                <constraint firstItem="4NS-dZ-C6g" firstAttribute="top" secondItem="rJo-6B-PCy" secondAttribute="bottom" constant="5" id="Cu8-vb-4Ds"/>
+                                                <constraint firstItem="obD-ky-OXi" firstAttribute="top" secondItem="KyV-v8-lv1" secondAttribute="top" constant="10" id="E02-K5-o9o"/>
+                                                <constraint firstItem="rJo-6B-PCy" firstAttribute="top" secondItem="KyV-v8-lv1" secondAttribute="top" constant="8" id="GVg-pq-hje"/>
+                                                <constraint firstItem="HSQ-2e-Uxu" firstAttribute="top" secondItem="4NS-dZ-C6g" secondAttribute="bottom" constant="2" id="JX6-58-2hU"/>
+                                                <constraint firstItem="CRP-ky-wiu" firstAttribute="top" secondItem="obD-ky-OXi" secondAttribute="bottom" constant="5" id="PEh-NH-I8W"/>
+                                                <constraint firstItem="wVC-Pl-F2Z" firstAttribute="leading" secondItem="KyV-v8-lv1" secondAttribute="leading" constant="8" id="RNm-rQ-IuE"/>
+                                                <constraint firstItem="HSQ-2e-Uxu" firstAttribute="leading" secondItem="wVC-Pl-F2Z" secondAttribute="trailing" constant="8" id="W7Z-Qk-WSc"/>
+                                                <constraint firstAttribute="trailing" secondItem="HSQ-2e-Uxu" secondAttribute="trailing" constant="8" id="WTO-94-Lgm"/>
+                                                <constraint firstItem="4NS-dZ-C6g" firstAttribute="leading" secondItem="wVC-Pl-F2Z" secondAttribute="trailing" constant="8" id="XBv-qG-La2"/>
+                                                <constraint firstItem="fJO-yd-mhi" firstAttribute="top" secondItem="HSQ-2e-Uxu" secondAttribute="bottom" constant="1" id="Yj1-nN-hSr"/>
+                                                <constraint firstItem="3gq-Ic-9BY" firstAttribute="centerY" secondItem="4NS-dZ-C6g" secondAttribute="centerY" id="bNl-LE-7AO"/>
+                                                <constraint firstItem="wVC-Pl-F2Z" firstAttribute="top" secondItem="KyV-v8-lv1" secondAttribute="top" constant="8" id="iKL-NA-9Nx"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wVC-Pl-F2Z" secondAttribute="bottom" constant="12" id="kER-UX-BYa"/>
+                                                <constraint firstItem="obD-ky-OXi" firstAttribute="leading" secondItem="rJo-6B-PCy" secondAttribute="trailing" constant="8" id="kfm-4O-nu6"/>
+                                                <constraint firstAttribute="trailing" secondItem="obD-ky-OXi" secondAttribute="trailing" constant="8" id="l3E-2X-jyN"/>
+                                                <constraint firstItem="rJo-6B-PCy" firstAttribute="leading" secondItem="wVC-Pl-F2Z" secondAttribute="trailing" constant="8" id="ofg-Oi-9lo"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="fJO-yd-mhi" secondAttribute="bottom" constant="8" id="pCF-2Z-iwc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -123,7 +122,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgb-4b-F1b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2694.202898550725" y="357.88043478260875"/>
+            <point key="canvasLocation" x="1683.876811594203" y="397.84375"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rxI-wB-91p">
@@ -141,7 +140,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1hC-7U-ChR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1786.9565217391305" y="357.88043478260875"/>
+            <point key="canvasLocation" x="1116.8478260869565" y="397.84375"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
 </document>
