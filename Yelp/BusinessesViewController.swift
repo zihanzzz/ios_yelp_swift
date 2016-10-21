@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerPreviewingDelegate {
     
     var businesses: [Business]!
     
@@ -16,6 +16,15 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if #available(iOS 9, *) {
+            if (traitCollection.forceTouchCapability == UIForceTouchCapability.available) {
+                registerForPreviewing(with: self, sourceView: self.businessTableView)
+                // It's important that the sourceView is set to the tableView instead of self.view
+                // Otherwise previewingContext.sourceRect will cause issues! (different coordinate system)
+                // but don't self.businessTableView and self.view have the same frame? No they don't (different width and height)
+            }
+        }
         
         businessTableView.delegate = self
         businessTableView.dataSource = self
@@ -64,7 +73,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
         cell.business = businesses[indexPath.row]
         
-        cell.businessNameLabel.preferredMaxLayoutWidth = cell.businessNameLabel.frame.width
+//        cell.businessNameLabel.preferredMaxLayoutWidth = cell.businessNameLabel.frame.width
         
         return cell
     }
@@ -73,6 +82,29 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - 3D Touch Preview
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        guard let indexPath = self.businessTableView.indexPathForRow(at: location) else {return nil}
+        guard let cell = self.businessTableView.cellForRow(at: indexPath) else {return nil}
+                
+        previewingContext.sourceRect = cell.frame
+
+        let vc = BusinessMapViewController()
+        vc.business = businesses[indexPath.row]
+        
+        let preferredWidth = self.view.frame.size.width - 50
+        vc.preferredContentSize = CGSize(width: preferredWidth, height: preferredWidth)
+        
+        
+        return vc
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+//        showDetailViewController(viewControllerToCommit, sender: self)
+    }
+    
     
     /*
      // MARK: - Navigation
