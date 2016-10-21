@@ -62,7 +62,7 @@ class BusinessMapViewController: UIViewController {
     }
     
     override var previewActionItems: [UIPreviewActionItem] {
-        let navigationAction = UIPreviewAction(title: "Open Maps App", style: .default) { (previewAction, viewController) in
+        let mapsAction = UIPreviewAction(title: "Open Maps App", style: .default) { (previewAction, viewController) in
             
             let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: self.coor2D!),
                            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: self.coorSpan!)]
@@ -78,7 +78,21 @@ class BusinessMapViewController: UIViewController {
             MKMapItem.openMaps(with: theMapPins, launchOptions: options)
             
         }
-        return [navigationAction]
+        
+        let googleAction = UIPreviewAction(title: "Open Google Maps", style: .default) { (previewAction, viewController) in
+            
+            let lat = self.coor2D!.latitude
+            let long = self.coor2D!.longitude
+            
+            if (UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://")!)) {
+                UIApplication.shared.openURL(URL(string: "comgooglemaps://?saddr=&daddr=\(lat),\(long)&directionsmode=driving")!)
+            } else {
+                print("can't open google maps")
+            }
+            
+        }
+        
+        return [mapsAction, googleAction]
     }
     
 

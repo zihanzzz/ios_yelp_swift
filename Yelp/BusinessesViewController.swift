@@ -31,7 +31,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         businessTableView.rowHeight = UITableViewAutomaticDimension
         businessTableView.estimatedRowHeight = 120
         
-        
         Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
             
             self.businesses = businesses
@@ -72,8 +71,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath) as! BusinessCell
         
         cell.business = businesses[indexPath.row]
-        
-//        cell.businessNameLabel.preferredMaxLayoutWidth = cell.businessNameLabel.frame.width
         
         return cell
     }
