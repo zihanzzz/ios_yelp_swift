@@ -17,6 +17,8 @@
 		22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AAAA9B1AEA1EC300A544AF /* BusinessesViewController.swift */; };
 		31D95BCBCA38716181E686D3 /* Pods_Yelp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79C0AC126EDAA235847CEA2 /* Pods_Yelp.framework */; };
 		47848697133B87663A122E3D /* Pods_YelpTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A1000F3975EB43318C1D4FA /* Pods_YelpTests.framework */; };
+		E147C47C1DB9D5B100B3E930 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147C47B1DB9D5B100B3E930 /* SwitchCell.swift */; };
+		E147C47E1DB9D6CA00B3E930 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147C47D1DB9D6CA00B3E930 /* FiltersViewController.swift */; };
 		E195DF761DB7FAF90098E1FB /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E195DF751DB7FAF90098E1FB /* UIConstants.swift */; };
 		E195DF781DB808740098E1FB /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E195DF771DB808740098E1FB /* BusinessCell.swift */; };
 		E19EF7971DB9706C001258B2 /* BusinessMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19EF7961DB9706C001258B2 /* BusinessMapViewController.swift */; };
@@ -51,6 +53,8 @@
 		9B128C050DE78660DE2A8E75 /* Pods-YelpTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YelpTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YelpTests/Pods-YelpTests.release.xcconfig"; sourceTree = "<group>"; };
 		AA3C5CF4FD317D72ABE2AAC4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C79C0AC126EDAA235847CEA2 /* Pods_Yelp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yelp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E147C47B1DB9D5B100B3E930 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
+		E147C47D1DB9D6CA00B3E930 /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		E195DF751DB7FAF90098E1FB /* UIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 		E195DF771DB808740098E1FB /* BusinessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
 		E19EF7961DB9706C001258B2 /* BusinessMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessMapViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +163,7 @@
 			children = (
 				22AAAA9B1AEA1EC300A544AF /* BusinessesViewController.swift */,
 				E19EF7961DB9706C001258B2 /* BusinessMapViewController.swift */,
+				E147C47D1DB9D6CA00B3E930 /* FiltersViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -178,6 +183,7 @@
 			children = (
 				E195DF751DB7FAF90098E1FB /* UIConstants.swift */,
 				E195DF771DB808740098E1FB /* BusinessCell.swift */,
+				E147C47B1DB9D5B100B3E930 /* SwitchCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -402,7 +408,9 @@
 				E19EF7971DB9706C001258B2 /* BusinessMapViewController.swift in Sources */,
 				E195DF761DB7FAF90098E1FB /* UIConstants.swift in Sources */,
 				222D8A7D19CCFAE000D2DB53 /* YelpClient.swift in Sources */,
+				E147C47C1DB9D5B100B3E930 /* SwitchCell.swift in Sources */,
 				222D8A5B19CCF9F900D2DB53 /* AppDelegate.swift in Sources */,
+				E147C47E1DB9D6CA00B3E930 /* FiltersViewController.swift in Sources */,
 				E195DF781DB808740098E1FB /* BusinessCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

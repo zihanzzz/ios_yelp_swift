@@ -52,13 +52,10 @@ class BusinessMapViewController: UIViewController {
         mapView?.selectAnnotation(annotation, animated: true)
         
         self.view.addSubview(mapView!)
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override var previewActionItems: [UIPreviewActionItem] {
@@ -83,27 +80,13 @@ class BusinessMapViewController: UIViewController {
             
             let lat = self.coor2D!.latitude
             let long = self.coor2D!.longitude
-            
+
             if (UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://")!)) {
                 UIApplication.shared.openURL(URL(string: "comgooglemaps://?saddr=&daddr=\(lat),\(long)&directionsmode=driving")!)
             } else {
                 print("can't open google maps")
             }
-            
         }
-        
         return [mapsAction, googleAction]
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

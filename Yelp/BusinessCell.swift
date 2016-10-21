@@ -47,9 +47,7 @@ class BusinessCell: UITableViewCell {
             if (business.address != nil) {
                 addressLabel.text = business.address
             }
-            
         }
-        
     }
 
     override func awakeFromNib() {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerPreviewingDelegate {
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerPreviewingDelegate, FiltersViewControllerDelegate {
     
     var businesses: [Business]!
     
@@ -16,6 +16,8 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UIConstants.configureNavBarStyle(forViewController: self)
         
         if #available(iOS 9, *) {
             if (traitCollection.forceTouchCapability == UIForceTouchCapability.available) {
@@ -69,15 +71,12 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath) as! BusinessCell
-        
         cell.business = businesses[indexPath.row]
-        
         return cell
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: - 3D Touch Preview
@@ -93,24 +92,26 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
         let preferredWidth = self.view.frame.size.width - 50
         vc.preferredContentSize = CGSize(width: preferredWidth, height: preferredWidth)
-        
-        
+
         return vc
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-//        showDetailViewController(viewControllerToCommit, sender: self)
+        // do nothing --> do not present the actual view controller
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let navigationController = segue.destination as! UINavigationController
+        let fitersViewController = navigationController.topViewController as! FiltersViewController
+        fitersViewController.delegate = self
+    }
     
+    func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String : AnyObject]) {
+        let categories = filters["categories"] as? [String]
+        Business.searchWithTerm(term: "Restaurants", sort: nil, categories: categories, deals: nil) { (businesses, error) in
+            self.businesses = businesses
+            self.businessTableView.reloadData()
+        }
+    }
 }
