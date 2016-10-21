@@ -120,6 +120,7 @@
                                 <segue destination="ZVd-tA-WXJ" kind="modal" id="cHx-4c-V4V"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Map" id="m6f-pc-y36"/>
                     </navigationItem>
                     <connections>
                         <outlet property="businessTableView" destination="dJS-VD-Dia" id="ppi-j5-Uhq"/>
@@ -148,7 +149,7 @@
                                         <rect key="frame" x="0.0" y="92" width="375" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3NA-Om-o1a" id="mTL-0f-o0O">
-                                            <frame key="frameInset" width="375" height="86"/>
+                                            <frame key="frameInset" width="375" height="86.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kef-G1-iI5">

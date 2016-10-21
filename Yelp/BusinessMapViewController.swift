@@ -71,9 +71,7 @@ class BusinessMapViewController: UIViewController {
             mapPin.name = self.business.name
             
             theMapPins.append(mapPin)
-
             MKMapItem.openMaps(with: theMapPins, launchOptions: options)
-            
         }
         
         let googleAction = UIPreviewAction(title: "Open Google Maps", style: .default) { (previewAction, viewController) in
@@ -87,6 +85,11 @@ class BusinessMapViewController: UIViewController {
                 print("can't open google maps")
             }
         }
-        return [mapsAction, googleAction]
+        
+        let dismissAction = UIPreviewAction(title: "Cancel", style: .default) { (previewAction, viewController) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        return [mapsAction, googleAction, dismissAction]
     }
 }

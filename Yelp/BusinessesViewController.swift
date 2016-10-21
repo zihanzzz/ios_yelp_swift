@@ -8,9 +8,13 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerPreviewingDelegate, FiltersViewControllerDelegate {
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerPreviewingDelegate, FiltersViewControllerDelegate, UISearchBarDelegate {
     
     var businesses: [Business]!
+    
+    var filteredBusinesses: [Business]!
+    
+    var searchBar: UISearchBar?
     
     @IBOutlet weak var businessTableView: UITableView!
     
@@ -33,8 +37,15 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         businessTableView.rowHeight = UITableViewAutomaticDimension
         businessTableView.estimatedRowHeight = 120
         
+        self.searchBar = UISearchBar()
+        self.searchBar?.sizeToFit()
+        self.navigationItem.titleView = self.searchBar
+        self.searchBar?.delegate = self
+        self.searchBar?.tintColor = UIConstants.yelpDarkRed
+        
         Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
             
+            self.filteredBusinesses = businesses
             self.businesses = businesses
             self.businessTableView.reloadData()
             if let businesses = businesses {
@@ -62,8 +73,8 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     // MARK: - TableView methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if businesses != nil {
-            return businesses!.count
+        if filteredBusinesses != nil {
+            return filteredBusinesses!.count
         } else {
             return 0
         }
@@ -71,7 +82,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath) as! BusinessCell
-        cell.business = businesses[indexPath.row]
+        cell.business = filteredBusinesses[indexPath.row]
         return cell
     }
     
@@ -99,6 +110,46 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         // do nothing --> do not present the actual view controller
     }
+    
+    // MARK: - Search Bar
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if (searchText.isEmpty) {
+            self.filteredBusinesses = self.businesses
+        } else {
+            // The user has entered text into the search box
+            // Use the filter method to iterate over all items in the data array
+            // For each item, return true if the item should be included and false if the
+            // item should NOT be included
+            
+            self.filteredBusinesses = self.businesses.filter({ (business: Business) -> Bool in
+                
+                if business.name?.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil {
+                    return true
+                } else {
+                    return false
+                }
+            })
+        }
+        self.businessTableView.reloadData()
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        
+        // Do a network API call here
+        if (searchBar.text != nil) {
+            Business.searchWithTerm(term: searchBar.text!) { (businesses, error) in
+                self.businesses = businesses
+                self.filteredBusinesses = businesses
+                self.businessTableView.reloadData()
+            }
+        }
+    }
+    // MARK: - Navigations related
     
      // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
