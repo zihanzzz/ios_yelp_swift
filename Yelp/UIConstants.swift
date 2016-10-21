@@ -16,6 +16,7 @@ class UIConstants: NSObject {
         viewController.navigationController?.navigationBar.barTintColor = UIConstants.yelpDarkRed
         viewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         viewController.navigationController?.navigationBar.tintColor = UIColor.white
+        viewController.navigationController?.navigationBar.isTranslucent = false
     }
     
     static func getYelpCategories() -> [[String:String]] {

@@ -42,18 +42,15 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         self.navigationItem.titleView = self.searchBar
         self.searchBar?.delegate = self
         self.searchBar?.tintColor = UIConstants.yelpDarkRed
+        self.searchBar?.barTintColor = UIConstants.yelpDarkRed
+        self.searchBar?.searchBarStyle = .prominent
+        self.searchBar?.isTranslucent = false
         
         Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
             
             self.filteredBusinesses = businesses
             self.businesses = businesses
             self.businessTableView.reloadData()
-            if let businesses = businesses {
-                for business in businesses {
-                    print(business.name!)
-                    print(business.address!)
-                }
-            }
             
             }
         )
@@ -78,6 +75,13 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         } else {
             return 0
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        searchBar?.resignFirstResponder()
+        
+//        let businessDetailsVC = BusinessDetailsViewController()
+//        self.navigationController?.pushViewController(businessDetailsVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -153,15 +157,28 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
      // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let navigationController = segue.destination as! UINavigationController
-        let fitersViewController = navigationController.topViewController as! FiltersViewController
-        fitersViewController.delegate = self
+        if let navigationController = segue.destination as? UINavigationController {
+            if let fitersViewController = navigationController.topViewController as? FiltersViewController {
+                fitersViewController.delegate = self
+            }
+        }
+
+        if let businessDeatilsViewController = segue.destination as? BusinessDetailsViewController {
+            
+            if let businessCell = sender as? BusinessCell {
+                businessDeatilsViewController.business = businessCell.business
+            }
+            
+        }
+        
+        
     }
     
     func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String : AnyObject]) {
         let categories = filters["categories"] as? [String]
         Business.searchWithTerm(term: "Restaurants", sort: nil, categories: categories, deals: nil) { (businesses, error) in
             self.businesses = businesses
+            self.filteredBusinesses = businesses
             self.businessTableView.reloadData()
         }
     }

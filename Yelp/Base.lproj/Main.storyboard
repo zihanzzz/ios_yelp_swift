@@ -5,7 +5,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Yelp-->
+        <!--Search-->
         <scene sceneID="5L9-Uz-lNK">
             <objects>
                 <viewController id="2xI-yr-O5N" customClass="BusinessesViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
@@ -20,11 +20,11 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dJS-VD-Dia">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BusinessCell" rowHeight="131" id="nxx-dC-OUC" customClass="BusinessCell" customModule="Yelp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BusinessCell" rowHeight="131" id="nxx-dC-OUC" customClass="BusinessCell" customModule="Yelp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="375" height="131"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nxx-dC-OUC" id="KyV-v8-lv1">
-                                            <frame key="frameInset" width="375" height="130.5"/>
+                                            <frame key="frameInset" width="342" height="130"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wVC-Pl-F2Z">
@@ -101,6 +101,7 @@
                                             <outlet property="ratingImageView" destination="4NS-dZ-C6g" id="UZK-0h-X7x"/>
                                             <outlet property="reviewsCountLabel" destination="3gq-Ic-9BY" id="HpZ-lt-rtg"/>
                                             <outlet property="thumbImageView" destination="wVC-Pl-F2Z" id="43v-MD-GcZ"/>
+                                            <segue destination="fOU-8V-10c" kind="push" id="1oZ-rM-Tvr"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -114,7 +115,7 @@
                             <constraint firstItem="dJS-VD-Dia" firstAttribute="top" secondItem="XhR-oz-92f" secondAttribute="top" id="dWH-q6-mHI"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Yelp" id="c95-HW-sMh">
+                    <navigationItem key="navigationItem" title="Search" id="c95-HW-sMh">
                         <barButtonItem key="leftBarButtonItem" title="Filters" id="9Re-nI-4ic">
                             <connections>
                                 <segue destination="ZVd-tA-WXJ" kind="modal" id="cHx-4c-V4V"/>
@@ -129,6 +130,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgb-4b-F1b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1683.876811594203" y="397.84375"/>
+        </scene>
+        <!--Business Details View Controller-->
+        <scene sceneID="IkB-Dn-717">
+            <objects>
+                <viewController id="fOU-8V-10c" customClass="BusinessDetailsViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DFA-i6-wzx"/>
+                        <viewControllerLayoutGuide type="bottom" id="qsn-vF-U4L"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vqy-D9-qv4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="iGQ-Dr-uoP"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EKA-gs-s73" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1684" y="1219"/>
         </scene>
         <!--Filters-->
         <scene sceneID="x46-s8-W7j">
