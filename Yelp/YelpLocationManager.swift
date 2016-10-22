@@ -31,6 +31,6 @@ class YelpLocationManager: NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.currentLocation2D = self.locationManager.location?.coordinate
-        print("manager instance: \(manager) updating locations  to = \(self.currentLocation2D?.latitude) \(self.currentLocation2D?.longitude)")
+//        print("manager instance: \(manager) updating locations  to = \(self.currentLocation2D?.latitude) \(self.currentLocation2D?.longitude)")
     }
 }

@@ -4,7 +4,7 @@
 
 [Project Overview](OVERVIEW.md)
 
-Time spent: **X** hours spent in total
+Time spent: **15** hours spent in total
 
 ## User Stories
 
@@ -17,9 +17,9 @@ The following **required** functionality is completed:
 - [ ] Filter page. Unfortunately, not all the filters are supported in the Yelp API.
    - [ ] The filters you should actually have are: category, sort (best match, distance, highest rated), distance, deals (on/off).
    - [ ] The filters table should be organized into sections as in the mock.
-   - [ ] You can use the default UISwitch for on/off states.
-   - [ ] Clicking on the "Search" button should dismiss the filters page and trigger the search w/ the new filter settings.
-   - [ ] Display some of the available Yelp categories (choose any 3-4 that you want).
+   - [x] You can use the default UISwitch for on/off states.
+   - [x] Clicking on the "Search" button should dismiss the filters page and trigger the search w/ the new filter settings.
+   - [x] Display some of the available Yelp categories (choose any 3-4 that you want).
 
 The following **optional** features are implemented:
 
@@ -30,13 +30,14 @@ The following **optional** features are implemented:
    - [ ] Implement a custom switch instead of the default UISwitch.
    - [ ] Distance filter should expand as in the real Yelp app
    - [ ] Categories should show a subset of the full list with a "See All" row to expand. Category list is [here](http://www.yelp.com/developers/documentation/category_list).
-- [ ] Implement the restaurant detail page.
+- [x] Implement the restaurant detail page.
 
 The following **additional** features are implemented:
 
 - [x] Use official Yelp color according to Yelp [guidelines](https://www.yelp.com/styleguide/color). Disabled NavBar translucency to make it look just like the real Yelp app.
 - [x] Support Force Touch Peek and Pop on Business Cells. Shows a preview of the location in a map and even allows the user to switch to either Maps App or Google Maps for navigation.
 - [x] Search bar is not only local results filtering. When the user clicks on "Search", it triggers an API call and returns the relevant businesses matching what the user has typed.
+- [x] Prompt user for location permission and base search on user's current location instead of the default San Francisco.
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
