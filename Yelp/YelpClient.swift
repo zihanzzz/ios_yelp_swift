@@ -10,6 +10,7 @@ import UIKit
 
 import AFNetworking
 import BDBOAuth1Manager
+import MapKit
 
 // You can register for Yelp API keys here: http://www.yelp.com/developers/manage_api_keys
 let yelpConsumerKey = "ap-wYMKChUQ-86p24TagEA"
@@ -51,7 +52,11 @@ class YelpClient: BDBOAuth1RequestOperationManager {
         // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
         
         // Default the location to San Francisco
-        var parameters: [String : AnyObject] = ["term": term as AnyObject, "ll": "37.785771,-122.406165" as AnyObject]
+        let userLocaiton = YelpLocationManager.sharedInstance.currentLocation2D
+        let lat = userLocaiton?.latitude ?? 37.785771
+        let long = userLocaiton?.longitude ?? -122.406165
+        
+        var parameters: [String : AnyObject] = ["term": term as AnyObject, "ll": "\(lat),\(long)" as AnyObject]
         
         if sort != nil {
             parameters["sort"] = sort!.rawValue as AnyObject?

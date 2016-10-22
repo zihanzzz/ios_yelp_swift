@@ -79,7 +79,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBar?.resignFirstResponder()
-        
 //        let businessDetailsVC = BusinessDetailsViewController()
 //        self.navigationController?.pushViewController(businessDetailsVC, animated: true)
     }
@@ -164,14 +163,10 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         }
 
         if let businessDeatilsViewController = segue.destination as? BusinessDetailsViewController {
-            
             if let businessCell = sender as? BusinessCell {
                 businessDeatilsViewController.business = businessCell.business
             }
-            
         }
-        
-        
     }
     
     func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String : AnyObject]) {

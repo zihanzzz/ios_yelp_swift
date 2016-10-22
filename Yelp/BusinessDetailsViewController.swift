@@ -10,12 +10,35 @@ import UIKit
 
 class BusinessDetailsViewController: UIViewController {
     
-    var business: Business?
+    var business: Business!
+    
+    @IBOutlet weak var businessImageView: UIImageView!
+    
+    @IBOutlet weak var businessNameLabel: UILabel!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationItem.title = business?.name
+        
+        if (business.imageURL != nil) {
+            businessImageView.setImageWith(business.imageURL!)
+            
+            if !UIAccessibilityIsReduceTransparencyEnabled() {
+                let blurEffect = UIBlurEffect(style: .light)
+                let blurEffectView = UIVisualEffectView(effect: blurEffect)
+                blurEffectView.frame = businessImageView.frame
+                blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                businessImageView.addSubview(blurEffectView)
+            }
+            
+        }
+        
+        if (business.name != nil) {
+            businessNameLabel.text = business.name
+        }
+        
         
     }
 

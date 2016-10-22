@@ -34,7 +34,9 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [x] Use official Yelp color according to Yelp [guidelines](https://www.yelp.com/styleguide/color)
+- [x] Use official Yelp color according to Yelp [guidelines](https://www.yelp.com/styleguide/color). Disabled NavBar translucency to make it look just like the real Yelp app.
+- [x] Support Force Touch Peek and Pop on Business Cells. Shows a preview of the location in a map and even allows the user to switch to either Maps App or Google Maps for navigation.
+- [x] Search bar is not only local results filtering. When the user clicks on "Search", it triggers an API call and returns the relevant businesses matching what the user has typed.
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 

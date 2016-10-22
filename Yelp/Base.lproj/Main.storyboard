@@ -142,13 +142,36 @@
                     <view key="view" contentMode="scaleToFill" id="vqy-D9-qv4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fwj-Dc-g2U">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="204" id="nk0-aB-R15"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Business Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ai1-Tt-SNe">
+                                <frame key="frameInset" minX="16" minY="72" width="118" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fwj-Dc-g2U" firstAttribute="leading" secondItem="vqy-D9-qv4" secondAttribute="leading" id="TBf-Hy-xyr"/>
+                            <constraint firstAttribute="trailing" secondItem="fwj-Dc-g2U" secondAttribute="trailing" id="fRF-ta-e3A"/>
+                            <constraint firstItem="fwj-Dc-g2U" firstAttribute="top" secondItem="DFA-i6-wzx" secondAttribute="bottom" id="gbB-v5-KXh"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="iGQ-Dr-uoP"/>
+                    <connections>
+                        <outlet property="businessImageView" destination="fwj-Dc-g2U" id="woz-Zz-qHq"/>
+                        <outlet property="businessNameLabel" destination="Ai1-Tt-SNe" id="Owu-Xn-Gg0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EKA-gs-s73" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1684" y="1219"/>
+            <point key="canvasLocation" x="1683.5" y="1218.5"/>
         </scene>
         <!--Filters-->
         <scene sceneID="x46-s8-W7j">
