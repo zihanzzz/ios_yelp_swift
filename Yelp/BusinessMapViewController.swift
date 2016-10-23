@@ -97,11 +97,24 @@ class BusinessMapViewController: UIViewController, MKMapViewDelegate {
             }
         }
         
+        let yelpAction = UIPreviewAction(title: "Open in Yelp", style: .default) { (previewAction, viewController) in
+            
+            let business = self.businesses[0]
+            let businessId = business.bizId
+            let bizURL = "yelp:///biz/" + businessId!
+            
+            if (UIApplication.shared.canOpenURL(URL(string: "yelp:")!)) {
+                UIApplication.shared.openURL(URL(string: bizURL)!)
+            } else {
+                print("can't open yelp")
+            }
+        }
+        
         let dismissAction = UIPreviewAction(title: "Cancel", style: .default) { (previewAction, viewController) in
             self.dismiss(animated: true, completion: nil)
         }
         
-        return [mapsAction, googleAction, dismissAction]
+        return [mapsAction, googleAction, yelpAction, dismissAction]
     }
     
     // MARK : - MKMapView delegate methods

@@ -18,7 +18,7 @@ let yelpConsumerSecret = "hLZAud45T6RnVKB0AwrkaV1I1MU"
 let yelpToken = "y9pGPqdF2JbuzLNMsePvA16_ea-M6Xez"
 let yelpTokenSecret = "MmScXcsFI6dW7tPirQ-3I0tKMSM"
 
-let defaultRadius: CGFloat = 5000
+let defaultRadius: CGFloat = 10000
 
 enum YelpSortMode: Int {
     case bestMatched = 0, distance, highestRated

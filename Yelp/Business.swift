@@ -19,12 +19,14 @@ class Business: NSObject {
     var coordinates: Dictionary<String, Double>?
     let phone: String?
     let displayPhone: String?
+    let bizId: String?
     
     init(dictionary: NSDictionary) {
         name = dictionary["name"] as? String
         
         phone = dictionary["phone"] as? String
         displayPhone = dictionary["display_phone"] as? String
+        bizId = dictionary["id"] as? String
         
         let imageURLString = dictionary["image_url"] as? String
         if imageURLString != nil {
@@ -100,7 +102,7 @@ class Business: NSObject {
         _ = YelpClient.sharedInstance.searchWithTerm(term, completion: completion)
     }
     
-    class func searchWithTerm(term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) -> Void {
-        _ = YelpClient.sharedInstance.searchWithTerm(term, sort: sort, categories: categories, deals: deals, completion: completion)
+    class func searchWithTerm(term: String, radius: CGFloat, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) -> Void {
+        _ = YelpClient.sharedInstance.searchWithTerm(term, radius: radius, sort: sort, categories: categories, deals: deals, completion: completion)
     }
 }

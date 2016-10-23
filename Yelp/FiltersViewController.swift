@@ -23,6 +23,10 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     var switchStates = [Int:Bool]()
     
+    var sections = ["Deal", "Distance", "Sort By", "Category"]
+    
+    var filter: Filter?
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         categories = UIConstants.getYelpCategories()
@@ -66,25 +70,63 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     // MARK: - Table View
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        
+        var numOfRows = 0
+        
+        switch section {
+        case 0:
+            numOfRows = 1
+            break
+        case 1:
+            numOfRows = 1
+            break
+        case 2:
+            numOfRows = 1
+            break
+        case 3:
+            numOfRows = categories.count
+            break
+        default:
+            break
+        }
+        return numOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
+
+        switch indexPath.section {
+        case 0:
+            break
+        case 1:
+            break
+        case 2:
+            break
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
+            cell.switchLabel.text = categories[indexPath.row]["name"]
+            cell.delegate = self
+            cell.onSwitch.isOn = switchStates[indexPath.row] ?? false
+            return cell
+            
+        default:
+            break
+        }
         
-        cell.switchLabel.text = categories[indexPath.row]["name"]
-        cell.delegate = self
-        
-        cell.onSwitch.isOn = switchStates[indexPath.row] ?? false
-        
-        return cell
+        return UITableViewCell()
     }
     
     // MARK: - SwitchCell Delegate method
     func switchCell(switchCell: SwitchCell, didChangeValue value: Bool) {
         let indexPath = filtersTableView.indexPath(for: switchCell)!
-        
         switchStates[indexPath.row] = value
     }
 }
