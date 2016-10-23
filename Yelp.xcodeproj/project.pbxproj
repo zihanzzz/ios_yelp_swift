@@ -26,6 +26,7 @@
 		E1F8A9941DBAF162007EDC1E /* YelpLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8A9931DBAF162007EDC1E /* YelpLocationManager.swift */; };
 		E1F8A9961DBC151C007EDC1E /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8A9951DBC151C007EDC1E /* Filter.swift */; };
 		E1F8A9981DBC3AD8007EDC1E /* BusinessAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8A9971DBC3AD8007EDC1E /* BusinessAnnotation.swift */; };
+		E1F8A99C1DBD4492007EDC1E /* ChoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F8A99B1DBD4492007EDC1E /* ChoiceCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		E1F8A9931DBAF162007EDC1E /* YelpLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpLocationManager.swift; sourceTree = "<group>"; };
 		E1F8A9951DBC151C007EDC1E /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		E1F8A9971DBC3AD8007EDC1E /* BusinessAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessAnnotation.swift; sourceTree = "<group>"; };
+		E1F8A99B1DBD4492007EDC1E /* ChoiceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChoiceCell.swift; sourceTree = "<group>"; };
 		EF53DC2D7A8303A68532E7C6 /* Pods-Yelp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yelp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yelp/Pods-Yelp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,6 +198,7 @@
 				E195DF771DB808740098E1FB /* BusinessCell.swift */,
 				E147C47B1DB9D5B100B3E930 /* SwitchCell.swift */,
 				E1F8A9971DBC3AD8007EDC1E /* BusinessAnnotation.swift */,
+				E1F8A99B1DBD4492007EDC1E /* ChoiceCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				E1F8A9941DBAF162007EDC1E /* YelpLocationManager.swift in Sources */,
 				222D8A5B19CCF9F900D2DB53 /* AppDelegate.swift in Sources */,
 				E147C47E1DB9D6CA00B3E930 /* FiltersViewController.swift in Sources */,
+				E1F8A99C1DBD4492007EDC1E /* ChoiceCell.swift in Sources */,
 				E195DF781DB808740098E1FB /* BusinessCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

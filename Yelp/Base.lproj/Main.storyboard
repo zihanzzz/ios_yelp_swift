@@ -183,7 +183,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5La-ik-EWr">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5La-ik-EWr">
+                                <frame key="frameInset" width="1000" height="1000"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="206" id="oKD-jZ-fWb"/>
                                 </constraints>
@@ -246,7 +247,7 @@
                                         <rect key="frame" x="0.0" y="92" width="375" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3NA-Om-o1a" id="mTL-0f-o0O">
-                                            <frame key="frameInset" width="375" height="86.5"/>
+                                            <frame key="frameInset" width="375" height="86"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kef-G1-iI5">
@@ -257,15 +258,46 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gw7-rP-2ql"/>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="gw7-rP-2ql" secondAttribute="trailing" constant="10" id="B53-gE-1CT"/>
+                                                <constraint firstAttribute="trailing" secondItem="gw7-rP-2ql" secondAttribute="trailing" constant="15" id="B53-gE-1CT"/>
                                                 <constraint firstItem="kef-G1-iI5" firstAttribute="centerY" secondItem="mTL-0f-o0O" secondAttribute="centerY" id="Lxi-Ah-eat"/>
-                                                <constraint firstItem="kef-G1-iI5" firstAttribute="leading" secondItem="mTL-0f-o0O" secondAttribute="leading" constant="10" id="bxk-Ap-N4d"/>
+                                                <constraint firstItem="kef-G1-iI5" firstAttribute="leading" secondItem="mTL-0f-o0O" secondAttribute="leading" constant="15" id="bxk-Ap-N4d"/>
                                                 <constraint firstItem="gw7-rP-2ql" firstAttribute="centerY" secondItem="mTL-0f-o0O" secondAttribute="centerY" id="gwt-ES-ZmL"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="onSwitch" destination="gw7-rP-2ql" id="Ljf-fJ-W8E"/>
                                             <outlet property="switchLabel" destination="kef-G1-iI5" id="Wpd-zJ-d9U"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChoiceCell" id="rjs-QT-erD" customClass="ChoiceCell" customModule="Yelp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="179" width="375" height="87"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rjs-QT-erD" id="H9h-IP-uj3">
+                                            <frame key="frameInset" width="375" height="86.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="haR-bv-fhZ">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="K0h-zb-OKX"/>
+                                                        <constraint firstAttribute="width" constant="30" id="YrM-rx-XWg"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y8J-9w-V3o">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="haR-bv-fhZ" secondAttribute="trailing" constant="15" id="0qw-aA-ZIE"/>
+                                                <constraint firstItem="haR-bv-fhZ" firstAttribute="centerY" secondItem="H9h-IP-uj3" secondAttribute="centerY" id="3EV-8p-A8s"/>
+                                                <constraint firstItem="y8J-9w-V3o" firstAttribute="leading" secondItem="H9h-IP-uj3" secondAttribute="leading" constant="15" id="BMQ-i8-NsC"/>
+                                                <constraint firstItem="haR-bv-fhZ" firstAttribute="centerY" secondItem="y8J-9w-V3o" secondAttribute="centerY" id="CNP-HH-JAp"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="choiceLabel" destination="y8J-9w-V3o" id="3fe-yi-oxn"/>
+                                            <outlet property="selectImageView" destination="haR-bv-fhZ" id="Sn4-sS-MIl"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -363,7 +395,6 @@
         <!--Navigation Controller-->
         <scene sceneID="d4c-MY-dXO">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9dL-6r-9Ol" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qlx-75-UXq" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="d4i-mI-a1V">
@@ -375,6 +406,7 @@
                         <segue destination="wve-JZ-ESm" kind="relationship" relationship="rootViewController" id="XGD-nv-bA8"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9dL-6r-9Ol" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2199" y="1284"/>
         </scene>

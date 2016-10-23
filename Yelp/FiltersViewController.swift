@@ -25,7 +25,13 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     var sections = ["Deal", "Distance", "Sort By", "Category"]
     
+    var distanceOptions = ["Auto", "0.3 miles", "1 mile", "5 miles", "20 miles"]
+    
+    var sortByOptions = ["Best Match", "Distance", "Ratings"]
+    
     var filter: Filter?
+    
+    var filterCopy: Filter?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -66,7 +72,8 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
             filters["categories"] = selectedCategories as AnyObject?
         }
         
-        delegate?.filtersViewController?(filtersViewController: self, didUpdateFilters: filters)
+//        delegate?.filtersViewController?(filtersViewController: self, didUpdateFilters: self.filterCopy)
+        delegate?.filtersViewController?(filtersViewController: self, didUpdateFilter: self.filterCopy!)
     }
     
     // MARK: - Table View
@@ -87,10 +94,10 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
             numOfRows = 1
             break
         case 1:
-            numOfRows = 1
+            numOfRows = 5
             break
         case 2:
-            numOfRows = 1
+            numOfRows = 3
             break
         case 3:
             numOfRows = categories.count
@@ -105,18 +112,31 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
 
         switch indexPath.section {
         case 0:
-            break
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
+            cell.switchLabel.text = "Offering a Deal"
+            cell.delegate = self
+            cell.onSwitch.isOn = self.filterCopy?.dealsBool ?? false
+            return cell
         case 1:
-            break
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ChoiceCell", for: indexPath) as! ChoiceCell
+            cell.choiceLabel.text = distanceOptions[indexPath.row]
+            if (indexPath.row == self.filterCopy?.radiusEnum.rawValue) {
+                cell.showSelectImage()
+            }
+            return cell
         case 2:
-            break
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ChoiceCell", for: indexPath) as! ChoiceCell
+            cell.choiceLabel.text = sortByOptions[indexPath.row]
+            if (indexPath.row == self.filterCopy?.sortModeEnum.rawValue) {
+                cell.showSelectImage()
+            }
+            return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
             cell.switchLabel.text = categories[indexPath.row]["name"]
             cell.delegate = self
             cell.onSwitch.isOn = switchStates[indexPath.row] ?? false
             return cell
-            
         default:
             break
         }
@@ -127,6 +147,10 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     // MARK: - SwitchCell Delegate method
     func switchCell(switchCell: SwitchCell, didChangeValue value: Bool) {
         let indexPath = filtersTableView.indexPath(for: switchCell)!
-        switchStates[indexPath.row] = value
+        if (indexPath.row == 0) {
+            self.filterCopy?.dealsBool = value
+        } else if (indexPath.row == 3) {
+            switchStates[indexPath.row] = value
+        }
     }
 }

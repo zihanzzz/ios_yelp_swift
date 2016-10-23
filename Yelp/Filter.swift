@@ -12,16 +12,16 @@ class Filter: NSObject {
     
     var dealsBool: Bool!
     
-    var radiusFloat: CGFloat!
+    var radiusEnum: YelpDistance!
     
     var sortModeEnum: YelpSortMode!
     
     var categoriesArray: [String]!
     
-    init(deals: Bool?, radius: CGFloat?, sortMode: YelpSortMode?, categories: [String]?) {
+    init(deals: Bool?, radius: YelpDistance?, sortMode: YelpSortMode?, categories: [String]?) {
         super.init()
         dealsBool = deals ?? false
-        radiusFloat = radius ?? 1000
+        radiusEnum = radius ?? YelpDistance.auto
         sortModeEnum = sortMode ?? YelpSortMode.bestMatched
         categoriesArray = categories ?? [String]()
     }

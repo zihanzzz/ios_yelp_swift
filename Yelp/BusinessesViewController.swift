@@ -22,11 +22,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if (filter == nil) {
-            filter = Filter(deals: nil, radius: nil, sortMode: nil, categories: nil)
-        }
-        
+
         UIConstants.configureNavBarStyle(forViewController: self)
         
         if #available(iOS 9, *) {
@@ -165,9 +161,13 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
      // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let navigationController = segue.destination as? UINavigationController {
-            if let fitersViewController = navigationController.topViewController as? FiltersViewController {
-                fitersViewController.filter = self.filter
-                fitersViewController.delegate = self
+            if let filtersVierController = navigationController.topViewController as? FiltersViewController {
+                if (self.filter == nil) {
+                    filter = Filter(deals: nil, radius: nil, sortMode: nil, categories: nil)
+                }
+                filtersVierController.filter = self.filter
+                filtersVierController.filterCopy = self.filter
+                filtersVierController.delegate = self
             }
             
             if let businessMapViewController = navigationController.topViewController as? BusinessMapViewController {
@@ -184,22 +184,23 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     // MARK: - Filters delegate method
-    func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String : AnyObject]) {
-        let categories = filters["categories"] as? [String]
-        Business.searchWithTerm(term: "Restaurants", radius: defaultRadius, sort: nil, categories: categories, deals: nil) { (businesses, error) in
-            self.businesses = businesses
-            self.filteredBusinesses = businesses
-            self.businessTableView.reloadData()
-        }
-    }
+//    func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String : AnyObject]) {
+//        let categories = filters["categories"] as? [String]
+//        Business.searchWithTerm(term: "Restaurants", radius: defaultRadius, sort: nil, categories: categories, deals: nil) { (businesses, error) in
+//            self.businesses = businesses
+//            self.filteredBusinesses = businesses
+//            self.businessTableView.reloadData()
+//        }
+//    }
     
     func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilter filter: Filter) {
+        self.filter = filter
         let searchTerm = "Restaurants"
-        let radius = filter.radiusFloat!
+        let radius = filter.radiusEnum
         let sort = filter.sortModeEnum
         let categories = filter.categoriesArray
         let deals = filter.dealsBool
-        Business.searchWithTerm(term: searchTerm, radius: radius, sort: sort, categories: categories, deals: deals) { (businesses, error) in
+        Business.searchWithTerm(term: searchTerm, radius: radius!, sort: sort, categories: categories, deals: deals) { (businesses, error) in
             self.businesses = businesses
             self.filteredBusinesses = businesses
             self.businessTableView.reloadData()
