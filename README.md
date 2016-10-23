@@ -25,7 +25,7 @@ The following **optional** features are implemented:
 
 - [ ] Search results page
    - [ ] Infinite scroll for restaurant results.
-   - [ ] Implement map view of restaurant results.
+   - [x] Implement map view of restaurant results.
 - [ ] Filter page
    - [ ] Implement a custom switch instead of the default UISwitch.
    - [ ] Distance filter should expand as in the real Yelp app
@@ -34,10 +34,15 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [x] Use official Yelp color according to Yelp [guidelines](https://www.yelp.com/styleguide/color). Disabled NavBar translucency to make it look just like the real Yelp app.
-- [x] Support Force Touch Peek and Pop on Business Cells. Shows a preview of the location in a map and even allows the user to switch to either Maps App or Google Maps for navigation.
+- [x] Use official Yelp color according to Yelp [guidelines](https://www.yelp.com/styleguide/color)
+   - [x] Disabled NavBar translucency to make it look just like the real Yelp app.
+- [x] Support Force Touch Peek and Pop on Business Cells.
+   - [x] 3D Touch a cell and show a preview of the location in a map.
+   - [x] Swipe up for options to switch to Apple Maps App or Google Maps App for navigation.
 - [x] Search bar is not only local results filtering. When the user clicks on "Search", it triggers an API call and returns the relevant businesses matching what the user has typed.
-- [x] Prompt user for location permission and base search on user's current location instead of the default San Francisco.
+- [x] Prompt user for location permission and base searches on user's current location instead of the default San Francisco.
+- [x] Within the Map View, which shows all the restaurants as pins, user can select/highlight a pin and tap on the "little i" button to go to the detail page for that certain restaurant.
+
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
