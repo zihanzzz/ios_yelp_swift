@@ -16,13 +16,15 @@ class Filter: NSObject {
     
     var sortModeEnum: YelpSortMode!
     
-    var categoriesArray: [String]!
+    var categoryStates = [Int:Bool]()
     
-    init(deals: Bool?, radius: YelpDistance?, sortMode: YelpSortMode?, categories: [String]?) {
+    init(deals: Bool?, radius: YelpDistance?, sortMode: YelpSortMode?, categoriesStates: [Int:Bool]) {
         super.init()
         dealsBool = deals ?? false
         radiusEnum = radius ?? YelpDistance.auto
         sortModeEnum = sortMode ?? YelpSortMode.bestMatched
-        categoriesArray = categories ?? [String]()
+        for (k, v) in categoriesStates {
+            categoryStates[k] = v
+        }
     }
 }

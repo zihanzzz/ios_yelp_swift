@@ -19,6 +19,32 @@ class UIConstants: NSObject {
         viewController.navigationController?.navigationBar.isTranslucent = false
     }
     
+    static func getDistanceInMeters(distanceEnum: YelpDistance) -> CGFloat {
+        switch distanceEnum {
+        case YelpDistance.auto:
+            return 0
+        case YelpDistance.option1:
+            return 482.80
+        case YelpDistance.option2:
+            return 1609.34
+        case YelpDistance.option3:
+            return 8046.72
+        case YelpDistance.option4:
+            return 32186.9
+        }
+    }
+    
+    static func getSelectedCategories(switchStates: [Int:Bool]) -> [String] {
+        let availableCategories = getYelpCategories()
+        var selectedCategories = [String]()
+        for (row, isSelected) in switchStates {
+            if isSelected {
+                selectedCategories.append(availableCategories[row]["code"]!)
+            }
+        }
+        return selectedCategories
+    }
+    
     static func getYelpCategories() -> [[String:String]] {
         let categories = [["name" : "Afghan", "code": "afghani"],
                           ["name" : "African", "code": "african"],

@@ -32,5 +32,9 @@ class ChoiceCell: UITableViewCell {
     func showSelectImage() {
         selectImageView.isHidden = false
     }
+    
+    func hideSelectImage() {
+        selectImageView.isHidden = true
+    }
 
 }

@@ -25,7 +25,7 @@ enum YelpSortMode: Int {
 }
 
 enum YelpDistance: Int {
-    case auto = 0, option1, option2, option3, optin4
+    case auto = 0, option1, option2, option3, option4
 }
 
 class YelpClient: BDBOAuth1RequestOperationManager {
@@ -82,7 +82,7 @@ class YelpClient: BDBOAuth1RequestOperationManager {
         }
         
         if radius != YelpDistance.auto {
-            parameters["radius_filter"] = radius.rawValue as AnyObject?
+            parameters["radius_filter"] = UIConstants.getDistanceInMeters(distanceEnum: radius) as AnyObject?
         }
         
         print(parameters)

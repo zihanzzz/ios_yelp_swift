@@ -163,7 +163,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         if let navigationController = segue.destination as? UINavigationController {
             if let filtersVierController = navigationController.topViewController as? FiltersViewController {
                 if (self.filter == nil) {
-                    filter = Filter(deals: nil, radius: nil, sortMode: nil, categories: nil)
+                    filter = Filter(deals: nil, radius: nil, sortMode: nil, categoriesStates: [Int:Bool]())
                 }
                 filtersVierController.filter = self.filter
                 filtersVierController.filterCopy = self.filter
@@ -184,21 +184,12 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     // MARK: - Filters delegate method
-//    func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String : AnyObject]) {
-//        let categories = filters["categories"] as? [String]
-//        Business.searchWithTerm(term: "Restaurants", radius: defaultRadius, sort: nil, categories: categories, deals: nil) { (businesses, error) in
-//            self.businesses = businesses
-//            self.filteredBusinesses = businesses
-//            self.businessTableView.reloadData()
-//        }
-//    }
-    
     func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilter filter: Filter) {
         self.filter = filter
         let searchTerm = "Restaurants"
         let radius = filter.radiusEnum
         let sort = filter.sortModeEnum
-        let categories = filter.categoriesArray
+        let categories = UIConstants.getSelectedCategories(switchStates: filter.categoryStates)
         let deals = filter.dealsBool
         Business.searchWithTerm(term: searchTerm, radius: radius!, sort: sort, categories: categories, deals: deals) { (businesses, error) in
             self.businesses = businesses
