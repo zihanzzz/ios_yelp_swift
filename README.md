@@ -14,8 +14,8 @@ The following **required** functionality is completed:
    - [x] Table rows should be dynamic height according to the content height.
    - [x] Custom cells should have the proper Auto Layout constraints.
    - [x] Search bar should be in the navigation bar (doesn't have to expand to show location like the real Yelp app does).
-- [ ] Filter page. Unfortunately, not all the filters are supported in the Yelp API.
-   - [ ] The filters you should actually have are: category, sort (best match, distance, highest rated), distance, deals (on/off).
+- [x] Filter page. Unfortunately, not all the filters are supported in the Yelp API.
+   - [x] The filters you should actually have are: category, sort (best match, distance, highest rated), distance, deals (on/off).
    - [x] The filters table should be organized into sections as in the mock.
    - [x] You can use the default UISwitch for on/off states.
    - [x] Clicking on the "Search" button should dismiss the filters page and trigger the search w/ the new filter settings.
@@ -37,14 +37,15 @@ The following **additional** features are implemented:
 - [x] Use official Yelp color according to Yelp [guidelines](https://www.yelp.com/styleguide/color)
    - [x] Disabled NavBar translucency to make it look just like the real Yelp app.
 - [x] Support Force Touch "Peek and Pop: on Business Cells.
-   - [x] 3D Touch a cell and show a preview of the location in a map.
+   - [x] 3D Touch a cell and show a preview of the location on a map.
    - [x] Swipe up for options of deep-linking to the following apps:
       - [x] Apple Maps that shows the business as a destination
       - [x] Google Maps that shows the business as a destination
       - [x] Yelp app that shows the business directly
 - [x] Search bar is not only local results filtering. When the user clicks on "Search", it triggers an API call and returns the relevant businesses matching what the user has typed.
 - [x] Prompt user for location permission and base searches on user's current location instead of the default San Francisco.
-- [x] Within the Map View, which shows all the restaurants as pins, user can select/highlight a pin and tap on the "little i" button to go to the detail page for that certain restaurant.
+- [x] Within the Map View, which shows all the restaurants as pins, user can select/highlight a pin and tap on the "little i" button to go to the detail page for that certain restaurant/business.
+- [x] Improve user experience by showing a loading indicator when querying the Yelp API.
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 

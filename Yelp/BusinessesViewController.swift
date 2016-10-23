@@ -48,26 +48,14 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         self.searchBar?.searchBarStyle = .prominent
         self.searchBar?.isTranslucent = false
         
-        Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
-            
+        UIConstants.showLoadingIndicator(view: self.view)
+        Business.searchWithTerm(term: "Restaurants", completion: { (businesses: [Business]?, error: Error?) -> Void in
+            UIConstants.dismissLoadingIndicator(view: self.view)
             self.filteredBusinesses = businesses
             self.businesses = businesses
             self.businessTableView.reloadData()
-            
             }
         )
-        
-        /* Example of Yelp search with more search options specified
-         Business.searchWithTerm("Restaurants", sort: .Distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
-         self.businesses = businesses
-         
-         for business in businesses {
-         print(business.name!)
-         print(business.address!)
-         }
-         }
-         */
-        
     }
     
     // MARK: - TableView methods
@@ -191,7 +179,9 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         let sort = filter.sortModeEnum
         let categories = UIConstants.getSelectedCategories(switchStates: filter.categoryStates)
         let deals = filter.dealsBool
+        UIConstants.showLoadingIndicator(view: self.view)
         Business.searchWithTerm(term: searchTerm, radius: radius!, sort: sort, categories: categories, deals: deals) { (businesses, error) in
+            UIConstants.dismissLoadingIndicator(view: self.view)
             self.businesses = businesses
             self.filteredBusinesses = businesses
             self.businessTableView.reloadData()

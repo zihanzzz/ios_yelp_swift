@@ -7,9 +7,18 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class UIConstants: NSObject {
     
+    static func showLoadingIndicator(view: UIView) {
+        MBProgressHUD.showAdded(to: view, animated: true)
+    }
+    
+    static func dismissLoadingIndicator(view: UIView) {
+        MBProgressHUD.hide(for: view, animated: true)
+    }
+
     static let yelpDarkRed = UIColor(red: 211/255, green: 35/255, blue: 35/255, alpha: 1)
     
     static func configureNavBarStyle(forViewController viewController: UIViewController) {
