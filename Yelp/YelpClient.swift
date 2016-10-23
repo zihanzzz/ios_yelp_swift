@@ -18,6 +18,8 @@ let yelpConsumerSecret = "hLZAud45T6RnVKB0AwrkaV1I1MU"
 let yelpToken = "y9pGPqdF2JbuzLNMsePvA16_ea-M6Xez"
 let yelpTokenSecret = "MmScXcsFI6dW7tPirQ-3I0tKMSM"
 
+let defaultRadius: CGFloat = 5000
+
 enum YelpSortMode: Int {
     case bestMatched = 0, distance, highestRated
 }
@@ -49,9 +51,14 @@ class YelpClient: BDBOAuth1RequestOperationManager {
     }
     
     func searchWithTerm(_ term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
+        return searchWithTerm(term, radius: defaultRadius, sort: sort, categories: categories, deals: deals, completion: completion)
+    }
+    
+    func searchWithTerm(_ term: String, radius: CGFloat, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
+        
         // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
         
-        // Default the location to San Francisco
+        // Default the location to San Francisco if cannot acquire user location
         let userLocaiton = YelpLocationManager.sharedInstance.currentLocation2D
         let lat = userLocaiton?.latitude ?? 37.785771
         let long = userLocaiton?.longitude ?? -122.406165
@@ -70,6 +77,10 @@ class YelpClient: BDBOAuth1RequestOperationManager {
             parameters["deals_filter"] = deals! as AnyObject?
         }
         
+        if radius > 0 {
+            parameters["radius_filter"] = radius as AnyObject?
+        }
+        
         print(parameters)
         
         return self.get("search", parameters: parameters,
@@ -80,9 +91,9 @@ class YelpClient: BDBOAuth1RequestOperationManager {
                                     completion(Business.businesses(array: dictionaries!), nil)
                                 }
                             }
-                        },
+            },
                         failure: { (operation: AFHTTPRequestOperation?, error: Error) -> Void in
                             completion(nil, error)
-                        })!
+        })!
     }
 }

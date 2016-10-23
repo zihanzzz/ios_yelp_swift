@@ -9,49 +9,60 @@
 import UIKit
 import MapKit
 
-class BusinessMapViewController: UIViewController {
+class BusinessMapViewController: UIViewController, MKMapViewDelegate {
     
     var mapView: MKMapView?
     
-    var coor2D: CLLocationCoordinate2D?
+    var isPreview: Bool = false
     
-    var coorSpan: MKCoordinateSpan?
+    var previewName: String?
     
-    var business: Business! {
-        didSet {
-        }
-    }
+    var previewCoor2D: CLLocationCoordinate2D?
+    
+    var previewCoorSpan: MKCoordinateSpan?
+    
+    var businesses: [Business]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UIConstants.configureNavBarStyle(forViewController: self)
         
         mapView = MKMapView()
         mapView?.frame = self.view.frame
         mapView?.mapType = .standard
         mapView?.isZoomEnabled = true
         
-        let coordinates = business.coordinates
+        if (!isPreview) {
+            mapView?.delegate = self
+        }
         
-        let lat = coordinates?["latitude"]!
-        let long = coordinates?["longitude"]!
+        var annotations = [BusinessAnnotation]()
+        
+        for business in businesses {
+            let annotation = BusinessAnnotation(business: business)
+            annotations.append(annotation)
+        }
+        
+        mapView?.addAnnotations(annotations)
+        mapView?.showAnnotations(annotations, animated: true)
+        mapView?.selectAnnotation(annotations[0], animated: true)
+        
+        if (isPreview) {
+            let businessAnnotation = annotations[0]
+            let business = businessAnnotation.business
+            previewName = business?.name
+            previewCoor2D = businessAnnotation.coordinate
+            previewCoorSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            mapView?.setCenter(businessAnnotation.coordinate, animated: true)
+        }
 
-        coor2D = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
-        coorSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        
-        let region = MKCoordinateRegion(center: coor2D!, span: coorSpan!)
-        
-        mapView?.setRegion(region, animated: true)
-        mapView?.setCenter(coor2D!, animated: true)
-        
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coor2D!
-        annotation.title = business.name
-        
-        mapView?.addAnnotation(annotation)
-        mapView?.selectAnnotation(annotation, animated: true)
-        
         self.view.addSubview(mapView!)
+    }
+    
+    @IBAction func listButtonTapped(_ sender: AnyObject) {
+        self.modalTransitionStyle = .flipHorizontal
+        self.dismiss(animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,14 +72,14 @@ class BusinessMapViewController: UIViewController {
     override var previewActionItems: [UIPreviewActionItem] {
         let mapsAction = UIPreviewAction(title: "Open Maps App", style: .default) { (previewAction, viewController) in
             
-            let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: self.coor2D!),
-                           MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: self.coorSpan!)]
+            let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: self.previewCoor2D!),
+                           MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: self.previewCoorSpan!)]
             
             var theMapPins = [MKMapItem]()
-            let placeMark = MKPlacemark(coordinate: self.coor2D!, addressDictionary: nil)
+            let placeMark = MKPlacemark(coordinate: self.previewCoor2D!, addressDictionary: nil)
             
             let mapPin = MKMapItem(placemark: placeMark)
-            mapPin.name = self.business.name
+            mapPin.name = self.previewName
             
             theMapPins.append(mapPin)
             MKMapItem.openMaps(with: theMapPins, launchOptions: options)
@@ -76,8 +87,8 @@ class BusinessMapViewController: UIViewController {
         
         let googleAction = UIPreviewAction(title: "Open Google Maps", style: .default) { (previewAction, viewController) in
             
-            let lat = self.coor2D!.latitude
-            let long = self.coor2D!.longitude
+            let lat = self.previewCoor2D!.latitude
+            let long = self.previewCoor2D!.longitude
 
             if (UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://")!)) {
                 UIApplication.shared.openURL(URL(string: "comgooglemaps://?saddr=&daddr=\(lat),\(long)&directionsmode=driving")!)
@@ -91,5 +102,21 @@ class BusinessMapViewController: UIViewController {
         }
         
         return [mapsAction, googleAction, dismissAction]
+    }
+    
+    // MARK : - MKMapView delegate methods
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: nil)
+        view.canShowCallout = true
+        view.rightCalloutAccessoryView = UIButton(type: .infoLight)
+        return view
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        let businessAnnotation = view.annotation as! BusinessAnnotation
+        let business = businessAnnotation.business
+        let businessDetailsViewController = self.storyboard?.instantiateViewController(withIdentifier: "Business Details") as! BusinessDetailsViewController
+        businessDetailsViewController.business = business
+        self.navigationController?.pushViewController(businessDetailsViewController, animated: true)
     }
 }

@@ -102,7 +102,8 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         previewingContext.sourceRect = cell.frame
 
         let vc = BusinessMapViewController()
-        vc.business = businesses[indexPath.row]
+        vc.businesses = [businesses[indexPath.row]]
+        vc.isPreview = true
         
         let preferredWidth = self.view.frame.size.width - 50
         vc.preferredContentSize = CGSize(width: preferredWidth, height: preferredWidth)
@@ -112,6 +113,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         // do nothing --> do not present the actual view controller
+//        present(viewControllerToCommit, animated: true, completion: nil)
     }
     
     // MARK: - Search Bar
@@ -160,6 +162,11 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
             if let fitersViewController = navigationController.topViewController as? FiltersViewController {
                 fitersViewController.delegate = self
             }
+            
+            if let businessMapViewController = navigationController.topViewController as? BusinessMapViewController {
+                navigationController.modalTransitionStyle = .flipHorizontal
+                businessMapViewController.businesses = filteredBusinesses
+            }
         }
 
         if let businessDeatilsViewController = segue.destination as? BusinessDetailsViewController {
@@ -169,6 +176,8 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+    // MARK: - Filters delegate method
+    
     func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String : AnyObject]) {
         let categories = filters["categories"] as? [String]
         Business.searchWithTerm(term: "Restaurants", sort: nil, categories: categories, deals: nil) { (businesses, error) in
@@ -176,5 +185,9 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
             self.filteredBusinesses = businesses
             self.businessTableView.reloadData()
         }
+    }
+    
+    func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilter filter: Filter) {
+        
     }
 }

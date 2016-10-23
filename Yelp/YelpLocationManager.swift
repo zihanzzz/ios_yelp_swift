@@ -10,7 +10,6 @@ import UIKit
 import CoreLocation
 import MapKit
 
-
 class YelpLocationManager: NSObject, CLLocationManagerDelegate {
     
     var locationManager = CLLocationManager()

@@ -85,8 +85,6 @@ class BusinessDetailsViewController: UIViewController {
             
             
         }
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
