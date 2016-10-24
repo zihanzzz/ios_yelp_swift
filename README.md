@@ -4,7 +4,7 @@
 
 [Project Overview](OVERVIEW.md)
 
-Time spent: **15** hours spent in total
+Time spent: **20** hours spent in total
 
 ## User Stories
 
@@ -42,6 +42,7 @@ The following **additional** features are implemented:
       - [x] Apple Maps that shows the business as a destination
       - [x] Google Maps that shows the business as a destination
       - [x] Yelp app that shows the business directly
+      - [x] Phone app that allows the user to call the business directly
 - [x] Search bar is not only local results filtering. When the user clicks on "Search", it triggers an API call and returns the relevant businesses matching what the user has typed.
 - [x] Prompt user for location permission and base searches on user's current location instead of the default San Francisco.
 - [x] Within the Map View, which shows all the restaurants as pins, user can select/highlight a pin and tap on the "little i" button to go to the detail page for that certain restaurant/business.

@@ -70,6 +70,8 @@ class BusinessMapViewController: UIViewController, MKMapViewDelegate {
     }
     
     override var previewActionItems: [UIPreviewActionItem] {
+        
+        
         let mapsAction = UIPreviewAction(title: "Open Maps App", style: .default) { (previewAction, viewController) in
             
             let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: self.previewCoor2D!),
@@ -110,11 +112,22 @@ class BusinessMapViewController: UIViewController, MKMapViewDelegate {
             }
         }
         
+        let callAction = UIPreviewAction(title: "Call Business", style: .default) { (previewAction, viewController) in
+            let business = self.businesses[0]
+            let urlString = "tel://" + business.phone!
+            
+            if let url = URL(string: urlString) {
+                UIApplication.shared.openURL(url)
+            } else {
+                print("can't call business")
+            }
+        }
+        
         let dismissAction = UIPreviewAction(title: "Cancel", style: .default) { (previewAction, viewController) in
             self.dismiss(animated: true, completion: nil)
         }
         
-        return [mapsAction, googleAction, yelpAction, dismissAction]
+        return [mapsAction, googleAction, yelpAction, callAction, dismissAction]
     }
     
     // MARK : - MKMapView delegate methods
