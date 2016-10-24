@@ -164,22 +164,22 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
             return cell
         case FilterSection.category.rawValue:
             
-            print(indexPath.row)
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ChoiceCell", for: indexPath) as! ChoiceCell
             cell.textLabel?.removeFromSuperview()
             cell.textLabel?.text = ""
-            cell.switchLabel.isHidden = false
-            cell.onSwitch.isHidden = false
+            cell.choiceLabel.isHidden = false
+            cell.hideSelectImage()
             cell.selectionStyle = .none
-            cell.delegate = self
             
             if (indexPath.row < 2 || isCategorySectionExpanded) {
-                cell.switchLabel.text = categories[indexPath.row]["name"]
-                cell.onSwitch.isOn = self.filterCopy?.categoryStates[indexPath.row] ?? false
+                cell.choiceLabel.text = categories[indexPath.row]["name"]
+                let categoryState = self.filterCopy?.categoryStates[indexPath.row] ?? false
+                if (categoryState) {
+                    cell.showCategoryImage()
+                }
             } else if (indexPath.row == 2 && !isCategorySectionExpanded) {
-                cell.switchLabel.isHidden = true
-                cell.onSwitch.isHidden = true
+                cell.hideSelectImage()
+                cell.choiceLabel.isHidden = true
                 cell.textLabel?.text = "Tap to See All"
                 cell.textLabel?.textAlignment = .center
                 cell.textLabel?.textColor = UIConstants.yelpDarkRed
@@ -235,6 +235,15 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
                     isCategorySectionExpanded = !isCategorySectionExpanded
                     self.filtersTableView.reloadSections(IndexSet.init(integer: FilterSection.category.rawValue), with: .automatic)
                 }
+            } else {
+                let categoryState = self.filterCopy?.categoryStates[indexPath.row] ?? false
+                let categoryCell = tableView.cellForRow(at: indexPath) as! ChoiceCell
+                if (categoryState) {
+                    categoryCell.hideSelectImage()
+                } else {
+                    categoryCell.showCategoryImage()
+                }
+                self.filterCopy?.categoryStates[indexPath.row] = !categoryState
             }
             
             break
