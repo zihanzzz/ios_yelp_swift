@@ -9,11 +9,14 @@
 import UIKit
 
 @objc protocol FiltersViewControllerDelegate {
-    @objc optional func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilters filters: [String:AnyObject])
     @objc optional func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilter filter:  Filter)
 }
 
 class FiltersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwitchCellDelegate {
+    
+    enum FilterSection: Int {
+        case deal = 0, distance,sortBy, category
+    }
     
     @IBOutlet weak var filtersTableView: UITableView!
     
@@ -33,6 +36,10 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     var filterCopy: Filter?
     
+    var isDistanceSectionExpanded = false
+    var isSortBySectionExpanded = false
+    var isCategorySectionExpanded = false
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         categories = UIConstants.getYelpCategories()
@@ -40,9 +47,7 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         UIConstants.configureNavBarStyle(forViewController: self)
-        
         filtersTableView.dataSource = self
         filtersTableView.delegate = self
     }
@@ -77,17 +82,29 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
         var numOfRows = 0
         
         switch section {
-        case 0:
+        case FilterSection.deal.rawValue:
             numOfRows = 1
             break
-        case 1:
-            numOfRows = 5
+        case FilterSection.distance.rawValue:
+            if (isDistanceSectionExpanded) {
+                numOfRows = distanceOptions.count
+            } else {
+                numOfRows = 1
+            }
             break
-        case 2:
-            numOfRows = 3
+        case FilterSection.sortBy.rawValue:
+            if (isSortBySectionExpanded) {
+                numOfRows = sortByOptions.count
+            } else {
+                numOfRows = 1
+            }
             break
-        case 3:
-            numOfRows = categories.count
+        case FilterSection.category.rawValue:
+            if (isCategorySectionExpanded) {
+                numOfRows = categories.count
+            } else {
+                numOfRows = 3
+            }
             break
         default:
             break
@@ -98,37 +115,73 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         switch indexPath.section {
-        case 0:
+        case FilterSection.deal.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
             cell.switchLabel.text = "Offering a Deal"
             cell.delegate = self
             cell.onSwitch.isOn = self.filterCopy?.dealsBool ?? false
-            return cell
-        case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ChoiceCell", for: indexPath) as! ChoiceCell
-            cell.choiceLabel.text = distanceOptions[indexPath.row]
             cell.selectionStyle = .none
-            if (indexPath.row == self.filterCopy?.radiusEnum.rawValue) {
-                cell.showSelectImage()
-            } else {
-                cell.hideSelectImage()
-            }
             return cell
-        case 2:
+        case FilterSection.distance.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChoiceCell", for: indexPath) as! ChoiceCell
-            cell.choiceLabel.text = sortByOptions[indexPath.row]
             cell.selectionStyle = .none
-            if (indexPath.row == self.filterCopy?.sortModeEnum.rawValue) {
-                cell.showSelectImage()
+            
+            if (isDistanceSectionExpanded) {
+                cell.choiceLabel.text = distanceOptions[indexPath.row]
+                if (indexPath.row == self.filterCopy?.radiusEnum.rawValue) {
+                    cell.showSelectImage()
+                } else {
+                    cell.hideSelectImage()
+                }
             } else {
-                cell.hideSelectImage()
+                let selectedValue = self.filterCopy?.radiusEnum.rawValue
+                cell.choiceLabel.text = distanceOptions[selectedValue!]
+                cell.showSelectImage()
             }
+            
             return cell
-        case 3:
+        case FilterSection.sortBy.rawValue:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ChoiceCell", for: indexPath) as! ChoiceCell
+            cell.selectionStyle = .none
+        
+            if (isSortBySectionExpanded) {
+                cell.choiceLabel.text = sortByOptions[indexPath.row]
+                if (indexPath.row == self.filterCopy?.sortModeEnum.rawValue) {
+                    cell.showSelectImage()
+                } else {
+                    cell.hideSelectImage()
+                }
+            } else {
+                let selectedValue = self.filterCopy?.sortModeEnum.rawValue
+                cell.choiceLabel.text = sortByOptions[selectedValue!]
+                cell.showSelectImage()
+            }
+            
+            return cell
+        case FilterSection.category.rawValue:
+            
+            print(indexPath.row)
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
-            cell.switchLabel.text = categories[indexPath.row]["name"]
+            cell.textLabel?.removeFromSuperview()
+            cell.textLabel?.text = ""
+            cell.switchLabel.isHidden = false
+            cell.onSwitch.isHidden = false
+            cell.selectionStyle = .none
             cell.delegate = self
-            cell.onSwitch.isOn = self.filterCopy?.categoryStates[indexPath.row] ?? false
+            
+            if (indexPath.row < 2 || isCategorySectionExpanded) {
+                cell.switchLabel.text = categories[indexPath.row]["name"]
+                cell.onSwitch.isOn = self.filterCopy?.categoryStates[indexPath.row] ?? false
+            } else if (indexPath.row == 2 && !isCategorySectionExpanded) {
+                cell.switchLabel.isHidden = true
+                cell.onSwitch.isHidden = true
+                cell.textLabel?.text = "See All"
+                cell.textLabel?.textAlignment = .center
+                cell.textLabel?.textColor = UIConstants.yelpDarkRed
+                cell.textLabel?.font = UIFont(name: "Helvetica-Bold", size: 35)
+            }
+            
             return cell
         default:
             break
@@ -139,15 +192,38 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
-        case 1:
-            let selectedRow = indexPath.row
-            self.filterCopy?.radiusEnum = YelpDistance(rawValue: selectedRow)
-            self.filtersTableView.reloadData()
+        case FilterSection.distance.rawValue:
+            
+            if isDistanceSectionExpanded {
+                let selectedRow = indexPath.row
+                self.filterCopy?.radiusEnum = YelpDistance(rawValue: selectedRow)
+            }
+            
+            isDistanceSectionExpanded = !isDistanceSectionExpanded
+            self.filtersTableView.reloadSections(IndexSet.init(integer: FilterSection.distance.rawValue), with: .automatic)
             break
-        case 2:
-            let selectedRow = indexPath.row
-            self.filterCopy?.sortModeEnum = YelpSortMode(rawValue: selectedRow)
-            self.filtersTableView.reloadData()
+        case FilterSection.sortBy.rawValue:
+            
+            if isSortBySectionExpanded {
+                let selectedRow = indexPath.row
+                self.filterCopy?.sortModeEnum = YelpSortMode(rawValue: selectedRow)
+            }
+            
+            isSortBySectionExpanded = !isSortBySectionExpanded
+            self.filtersTableView.reloadSections(IndexSet.init(integer: FilterSection.sortBy.rawValue), with: .automatic)
+            break
+        
+        case FilterSection.category.rawValue:
+            
+            if (!isCategorySectionExpanded) {
+                let selectedRow = indexPath.row
+                if (selectedRow == 2) {
+                    isCategorySectionExpanded = !isCategorySectionExpanded
+                    self.filtersTableView.reloadSections(IndexSet.init(integer: FilterSection.category.rawValue), with: .automatic)
+                }
+            }
+            
+            break
         default:
             break
         }

@@ -22,7 +22,7 @@ class SwitchCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        self.onSwitch.onTintColor = UIConstants.yelpDarkRed
         onSwitch.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
     }
 

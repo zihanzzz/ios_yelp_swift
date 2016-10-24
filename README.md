@@ -29,7 +29,7 @@ The following **optional** features are implemented:
 - [ ] Filter page
    - [ ] Implement a custom switch instead of the default UISwitch.
    - [ ] Distance filter should expand as in the real Yelp app
-   - [ ] Categories should show a subset of the full list with a "See All" row to expand. Category list is [here](http://www.yelp.com/developers/documentation/category_list).
+   - [x] Categories should show a subset of the full list with a "See All" row to expand. Category list is [here](http://www.yelp.com/developers/documentation/category_list).
 - [x] Implement the restaurant detail page.
 
 The following **additional** features are implemented:
@@ -47,6 +47,7 @@ The following **additional** features are implemented:
 - [x] Prompt user for location permission and base searches on user's current location instead of the default San Francisco.
 - [x] Within the Map View, which shows all the restaurants as pins, user can select/highlight a pin and tap on the "little i" button to go to the detail page for that certain restaurant/business.
 - [x] Improve user experience by showing a loading indicator when querying the Yelp API.
+- [x] Improve user experience by adding expandable table rows for "Distance" and "Sort" by section.
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
