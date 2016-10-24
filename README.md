@@ -34,15 +34,15 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [x] Support **Force Touch "Peek and Pop"**: on Business Cells.
+- [x] Support **Force Touch "Peek and Pop"** on Business Cells.
    - [x] 3D Touch a cell and see a preview of the location on a map.
    - [x] Swipe up for options of **deep-linking** to the following apps:
-      - [x] 1. Apple Maps that shows the business as a destination
-      - [x] 2. Google Maps that shows the business as a destination
-      - [x] 3. The real Yelp app that shows the business directly
-      - [x] 4. Phone app that allows the user to call the business directly
+      - [x] 1. **Apple Maps** that shows the business as a destination
+      - [x] 2. **Google Maps** that shows the business as a destination
+      - [x] 3. **The real Yelp app** that shows the business directly
+      - [x] 4. **Phone app** that allows the user to call the business directly
 - [x] Search bar is not only local results filtering. When the user clicks on "Search", it triggers an API call and returns the relevant businesses matching what the user has typed.
-- [x] Prompt user for location permission and base searches on user's current location instead of the default San Francisco.
+- [x] Prompt user for **location permission** and base searches on user's current location instead of the default San Francisco.
 - [x] Within the Map View, which shows all the restaurants as pins, user can select/highlight a pin and tap on the "little i" button to go to the detail page for that certain restaurant/business.
 - [x] Improve user experience by showing a loading indicator when querying the Yelp API.
 - [x] Improve user experience by adding expandable table rows for "Distance" and "Sort" by section.
@@ -67,6 +67,9 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Notes
 
 Describe any challenges encountered while building the app.
+
+1. This is my first time doing Auto-Layout using Storyboards. I have only worked with Masonry programatically before. I had to be really careful when adding constraints and it was really easy to make mistakes.
+2. BusinessViewController and FiltersViewController are really logic intensive. In fact, a lot of code could be factored out.
 
 ## License
 
