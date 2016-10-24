@@ -20,7 +20,7 @@ class ChoiceCell: UITableViewCell {
         
         selectImageView.isHidden = true
         self.choiceLabel.textColor = UIConstants.yelpDarkRed
-        self.choiceLabel.font = UIFont(name: UIConstants.getTextFontName(), size: 20)
+        self.choiceLabel.font = UIFont(name: UIConstants.getTextFontNameBold(), size: 20)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

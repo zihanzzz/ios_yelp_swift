@@ -24,6 +24,8 @@ class BusinessCell: UITableViewCell {
     
     @IBOutlet weak var categoriesLabel: UILabel!
     
+    @IBOutlet weak var dollarSignLabel: UILabel!
+
     var business: Business! {
         didSet {
             if (business.imageURL != nil) {
@@ -55,6 +57,11 @@ class BusinessCell: UITableViewCell {
         // Initialization code
         thumbImageView.layer.cornerRadius = 3
         thumbImageView.clipsToBounds = true
+        
+        businessNameLabel.font = UIFont(name: UIConstants.getTextFontNameRegular(), size: 20)
+        for label in [distanceLabel, reviewsCountLabel, addressLabel, categoriesLabel, dollarSignLabel] {
+            label?.font = UIFont(name: UIConstants.getTextFontNameRegular(), size: 13)
+        }
     }
     
     override func layoutSubviews() {

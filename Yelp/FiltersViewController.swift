@@ -12,7 +12,7 @@ import UIKit
     @objc optional func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilter filter:  Filter)
 }
 
-class FiltersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwitchCellDelegate {
+class FiltersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     enum FilterSection: Int {
         case deal = 0, distance,sortBy, category
@@ -183,7 +183,7 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
                 cell.textLabel?.text = "Tap to See All"
                 cell.textLabel?.textAlignment = .center
                 cell.textLabel?.textColor = UIConstants.yelpDarkRed
-                cell.textLabel?.font = UIFont(name: "Helvetica-Bold", size: 25)
+                cell.textLabel?.font = UIFont(name: UIConstants.getTextFontNameBold(), size: 25)
             }
             
             return cell
@@ -249,17 +249,6 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
             break
         default:
             break
-        }
-    }
-    
-    // MARK: - SwitchCell Delegate method
-    func switchCell(switchCell: SwitchCell, didChangeValue value: Bool) {
-        let indexPath = filtersTableView.indexPath(for: switchCell)!
-        if (indexPath.section == 0) {
-            self.filterCopy?.dealsBool = value
-        } else if (indexPath.section == 3) {
-            switchStates[indexPath.row] = value
-            self.filterCopy?.categoryStates = switchStates
         }
     }
 }

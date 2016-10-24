@@ -26,8 +26,8 @@ The following **optional** features are implemented:
 - [x] Search results page
    - [x] Infinite scroll for restaurant results.
    - [x] Implement map view of restaurant results.
-- [ ] Filter page
-   - [ ] Implement a custom switch instead of the default UISwitch.
+- [x] Filter page
+   - [x] Implement a custom switch instead of the default UISwitch.
    - [ ] Distance filter should expand as in the real Yelp app
    - [x] Categories should show a subset of the full list with a "See All" row to expand. Category list is [here](http://www.yelp.com/developers/documentation/category_list).
 - [x] Implement the restaurant detail page.
@@ -41,13 +41,14 @@ The following **additional** features are implemented:
    - [x] Swipe up for options of **deep-linking** to the following apps:
       - [x] 1. Apple Maps that shows the business as a destination
       - [x] 2. Google Maps that shows the business as a destination
-      - [x] 3. Yelp app that shows the business directly
+      - [x] 3. The real Yelp app that shows the business directly
       - [x] 4. Phone app that allows the user to call the business directly
 - [x] Search bar is not only local results filtering. When the user clicks on "Search", it triggers an API call and returns the relevant businesses matching what the user has typed.
 - [x] Prompt user for location permission and base searches on user's current location instead of the default San Francisco.
 - [x] Within the Map View, which shows all the restaurants as pins, user can select/highlight a pin and tap on the "little i" button to go to the detail page for that certain restaurant/business.
 - [x] Improve user experience by showing a loading indicator when querying the Yelp API.
 - [x] Improve user experience by adding expandable table rows for "Distance" and "Sort" by section.
+- [x] Improve user experience by replacing all switched in the Filter page with [Badges](https://www.yelp.com/styleguide/illustrations#badges)
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 

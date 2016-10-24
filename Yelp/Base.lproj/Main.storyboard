@@ -98,6 +98,7 @@
                                             <outlet property="businessNameLabel" destination="rJo-6B-PCy" id="FKq-7X-bmv"/>
                                             <outlet property="categoriesLabel" destination="fJO-yd-mhi" id="kM8-h2-Eke"/>
                                             <outlet property="distanceLabel" destination="obD-ky-OXi" id="gh1-d3-fzG"/>
+                                            <outlet property="dollarSignLabel" destination="CRP-ky-wiu" id="6Ux-WU-HWy"/>
                                             <outlet property="ratingImageView" destination="4NS-dZ-C6g" id="UZK-0h-X7x"/>
                                             <outlet property="reviewsCountLabel" destination="3gq-Ic-9BY" id="HpZ-lt-rtg"/>
                                             <outlet property="thumbImageView" destination="wVC-Pl-F2Z" id="43v-MD-GcZ"/>
@@ -243,34 +244,8 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="87" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dpx-1X-ic5">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitchCell" rowHeight="87" id="3NA-Om-o1a" customClass="SwitchCell" customModule="Yelp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="375" height="87"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3NA-Om-o1a" id="mTL-0f-o0O">
-                                            <frame key="frameInset" width="375" height="86"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kef-G1-iI5">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gw7-rP-2ql"/>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="gw7-rP-2ql" secondAttribute="trailing" constant="15" id="B53-gE-1CT"/>
-                                                <constraint firstItem="kef-G1-iI5" firstAttribute="centerY" secondItem="mTL-0f-o0O" secondAttribute="centerY" id="Lxi-Ah-eat"/>
-                                                <constraint firstItem="kef-G1-iI5" firstAttribute="leading" secondItem="mTL-0f-o0O" secondAttribute="leading" constant="15" id="bxk-Ap-N4d"/>
-                                                <constraint firstItem="gw7-rP-2ql" firstAttribute="centerY" secondItem="mTL-0f-o0O" secondAttribute="centerY" id="gwt-ES-ZmL"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="onSwitch" destination="gw7-rP-2ql" id="Ljf-fJ-W8E"/>
-                                            <outlet property="switchLabel" destination="kef-G1-iI5" id="Wpd-zJ-d9U"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChoiceCell" id="rjs-QT-erD" customClass="ChoiceCell" customModule="Yelp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="179" width="375" height="87"/>
+                                        <rect key="frame" x="0.0" y="92" width="375" height="87"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rjs-QT-erD" id="H9h-IP-uj3">
                                             <frame key="frameInset" width="375" height="86.5"/>
@@ -278,8 +253,8 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="haR-bv-fhZ">
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="K0h-zb-OKX"/>
-                                                        <constraint firstAttribute="width" constant="30" id="YrM-rx-XWg"/>
+                                                        <constraint firstAttribute="height" constant="45" id="K0h-zb-OKX"/>
+                                                        <constraint firstAttribute="width" constant="45" id="YrM-rx-XWg"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y8J-9w-V3o">

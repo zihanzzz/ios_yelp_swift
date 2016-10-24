@@ -23,9 +23,12 @@ class UIConstants: NSObject {
     
     static func configureNavBarStyle(forViewController viewController: UIViewController) {
         viewController.navigationController?.navigationBar.barTintColor = UIConstants.yelpDarkRed
-        viewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        viewController.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white,
+                                                                                  NSFontAttributeName: getTitleFont()]
         viewController.navigationController?.navigationBar.tintColor = UIColor.white
         viewController.navigationController?.navigationBar.isTranslucent = false
+        viewController.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: getBarButtonItemFont()], for: .normal)
+        viewController.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: getBarButtonItemFont()], for: .normal)
     }
     
     static func getDistanceInMeters(distanceEnum: YelpDistance) -> CGFloat {
@@ -54,8 +57,20 @@ class UIConstants: NSObject {
         return selectedCategories
     }
     
-    static func getTextFontName() -> String {
-        return "ArialRoundedMTBold"
+    static func getBarButtonItemFont() -> UIFont {
+        return UIFont(name: getTextFontNameBold(), size: 16)!
+    }
+    
+    static func getTitleFont() -> UIFont {
+        return UIFont(name: getTextFontNameBold(), size: 20)!
+    }
+    
+    static func getTextFontNameBold() -> String {
+        return "TrebuchetMS-Bold"
+    }
+    
+    static func getTextFontNameRegular() -> String {
+        return "TrebuchetMS"
     }
     
     static func getYelpCategories() -> [[String:String]] {

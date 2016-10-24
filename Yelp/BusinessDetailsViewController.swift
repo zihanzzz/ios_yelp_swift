@@ -32,6 +32,11 @@ class BusinessDetailsViewController: UIViewController {
         
         self.navigationItem.title = business?.name
         
+        businessNameLabel.font = UIFont(name: UIConstants.getTextFontNameBold(), size: 20)
+        for label in [distanceLabel, reviewsCountLabel, categoriesLabel] {
+            label?.font = UIFont(name: UIConstants.getTextFontNameRegular(), size: 17)
+        }
+        
         if (business.imageURL != nil) {
             businessImageView.setImageWith(business.imageURL!)
             
