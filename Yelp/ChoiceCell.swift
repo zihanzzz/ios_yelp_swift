@@ -14,13 +14,13 @@ class ChoiceCell: UITableViewCell {
     
     @IBOutlet weak var selectImageView: UIImageView!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
-        selectImageView.image = UIImage(named: "selected")
         selectImageView.isHidden = true
+        self.choiceLabel.textColor = UIConstants.yelpDarkRed
+        self.choiceLabel.font = UIFont(name: UIConstants.getTextFontName(), size: 20)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -29,12 +29,30 @@ class ChoiceCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func showDealSelectedImage() {
+        selectImageView.image = UIImage(named: "deal_selected")
+        selectImageView.isHidden = false
+    }
+    
+    func showDealDeselectedImage() {
+        selectImageView.image = UIImage(named: "deal_deselected")
+        selectImageView.isHidden = false
+    }
+    
     func showSelectImage() {
+        selectImageView.image = UIImage(named: "selected")
+        selectImageView.isHidden = false
+    }
+    
+    func showCategoryImage() {
+        selectImageView.image = UIImage(named: "category")
         selectImageView.isHidden = false
     }
     
     func hideSelectImage() {
         selectImageView.isHidden = true
     }
+    
+    
 
 }

@@ -54,6 +54,10 @@ class UIConstants: NSObject {
         return selectedCategories
     }
     
+    static func getTextFontName() -> String {
+        return "ArialRoundedMTBold"
+    }
+    
     static func getYelpCategories() -> [[String:String]] {
         let categories = [["name" : "Afghan", "code": "afghani"],
                           ["name" : "African", "code": "african"],

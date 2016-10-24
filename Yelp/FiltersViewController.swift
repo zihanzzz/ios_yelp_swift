@@ -116,10 +116,14 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
 
         switch indexPath.section {
         case FilterSection.deal.rawValue:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as! SwitchCell
-            cell.switchLabel.text = "Offering a Deal"
-            cell.delegate = self
-            cell.onSwitch.isOn = self.filterCopy?.dealsBool ?? false
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ChoiceCell", for: indexPath) as! ChoiceCell
+            cell.choiceLabel.text = "Offering a Deal"
+            let dealState = self.filterCopy?.dealsBool ?? false
+            if (dealState) {
+                cell.showDealSelectedImage()
+            } else {
+                cell.showDealDeselectedImage()
+            }
             cell.selectionStyle = .none
             return cell
         case FilterSection.distance.rawValue:
@@ -176,10 +180,10 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
             } else if (indexPath.row == 2 && !isCategorySectionExpanded) {
                 cell.switchLabel.isHidden = true
                 cell.onSwitch.isHidden = true
-                cell.textLabel?.text = "See All"
+                cell.textLabel?.text = "Tap to See All"
                 cell.textLabel?.textAlignment = .center
                 cell.textLabel?.textColor = UIConstants.yelpDarkRed
-                cell.textLabel?.font = UIFont(name: "Helvetica-Bold", size: 35)
+                cell.textLabel?.font = UIFont(name: "Helvetica-Bold", size: 25)
             }
             
             return cell
@@ -192,6 +196,16 @@ class FiltersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
+        case FilterSection.deal.rawValue:
+            let dealCell = tableView.cellForRow(at: indexPath) as! ChoiceCell
+            let dealState = self.filterCopy?.dealsBool ?? false
+            if (!dealState) {
+                dealCell.showDealSelectedImage()
+            } else {
+                dealCell.showDealDeselectedImage()
+            }
+            self.filterCopy?.dealsBool = !dealState
+            break
         case FilterSection.distance.rawValue:
             
             if isDistanceSectionExpanded {

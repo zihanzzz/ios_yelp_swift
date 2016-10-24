@@ -34,15 +34,15 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [x] Use official Yelp color according to Yelp [guidelines](https://www.yelp.com/styleguide/color)
+- [x] Use official Yelp color according to Yelp's [StyleGuide](https://www.yelp.com/styleguide/color)
    - [x] Disabled NavBar translucency to make it look just like the real Yelp app.
-- [x] Support Force Touch "Peek and Pop: on Business Cells.
-   - [x] 3D Touch a cell and show a preview of the location on a map.
-   - [x] Swipe up for options of deep-linking to the following apps:
-      - [x] Apple Maps that shows the business as a destination
-      - [x] Google Maps that shows the business as a destination
-      - [x] Yelp app that shows the business directly
-      - [x] Phone app that allows the user to call the business directly
+- [x] Support **Force Touch "Peek and Pop"**: on Business Cells.
+   - [x] 3D Touch a cell and see a preview of the location on a map.
+   - [x] Swipe up for options of **deep-linking** to the following apps:
+      - [x] 1. Apple Maps that shows the business as a destination
+      - [x] 2. Google Maps that shows the business as a destination
+      - [x] 3. Yelp app that shows the business directly
+      - [x] 4. Phone app that allows the user to call the business directly
 - [x] Search bar is not only local results filtering. When the user clicks on "Search", it triggers an API call and returns the relevant businesses matching what the user has typed.
 - [x] Prompt user for location permission and base searches on user's current location instead of the default San Francisco.
 - [x] Within the Map View, which shows all the restaurants as pins, user can select/highlight a pin and tap on the "little i" button to go to the detail page for that certain restaurant/business.

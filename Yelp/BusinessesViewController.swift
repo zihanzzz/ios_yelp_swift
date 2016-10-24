@@ -87,13 +87,13 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBar?.resignFirstResponder()
-//        let businessDetailsVC = BusinessDetailsViewController()
-//        self.navigationController?.pushViewController(businessDetailsVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath) as! BusinessCell
         cell.business = filteredBusinesses[indexPath.row]
+        cell.selectionStyle = .none
+        cell.accessoryType = .none
         return cell
     }
     
