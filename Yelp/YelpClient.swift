@@ -55,10 +55,10 @@ class YelpClient: BDBOAuth1RequestOperationManager {
     }
     
     func searchWithTerm(_ term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
-        return searchWithTerm(term, radius: YelpDistance.auto, sort: sort, categories: categories, deals: deals, completion: completion)
+        return searchWithTerm(term, offset: 0, radius: YelpDistance.auto, sort: sort, categories: categories, deals: deals, completion: completion)
     }
     
-    func searchWithTerm(_ term: String, radius: YelpDistance, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
+    func searchWithTerm(_ term: String, offset: Int, radius: YelpDistance, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completion: @escaping ([Business]?, Error?) -> Void) -> AFHTTPRequestOperation {
         
         // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
         
@@ -84,6 +84,8 @@ class YelpClient: BDBOAuth1RequestOperationManager {
         if radius != YelpDistance.auto {
             parameters["radius_filter"] = UIConstants.getDistanceInMeters(distanceEnum: radius) as AnyObject?
         }
+        
+        parameters["offset"] = offset as AnyObject?
         
         print(parameters)
         

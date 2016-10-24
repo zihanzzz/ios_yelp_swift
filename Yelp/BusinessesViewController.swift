@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerPreviewingDelegate, FiltersViewControllerDelegate, UISearchBarDelegate {
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIViewControllerPreviewingDelegate, FiltersViewControllerDelegate, UISearchBarDelegate, UIScrollViewDelegate {
     
     var businesses: [Business]!
     
@@ -18,10 +18,28 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     var filter: Filter?
     
+    var isMoreDataLoading = false
+    
+    var isMoreDataComing = true
+    
+    var offset = 0
+    
+    var loadingMoreView: InfiniteScrollActivityView?
+    
     @IBOutlet weak var businessTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set up Infinite Scroll Loading indicator
+        let frame = CGRect(x: 0, y: self.businessTableView.contentSize.height, width: self.businessTableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
+        loadingMoreView = InfiniteScrollActivityView(frame: frame)
+        loadingMoreView!.isHidden = true
+        self.businessTableView.addSubview(loadingMoreView!)
+        
+        var insets = self.businessTableView.contentInset
+        insets.bottom += InfiniteScrollActivityView.defaultHeight
+        self.businessTableView.contentInset = insets
 
         UIConstants.configureNavBarStyle(forViewController: self)
         
@@ -145,8 +163,6 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     // MARK: - Navigations related
-    
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let navigationController = segue.destination as? UINavigationController {
             if let filtersVierController = navigationController.topViewController as? FiltersViewController {
@@ -171,16 +187,47 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+    // MARK: - ScrollView delegate method
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            let scrollViewContentHeight = self.businessTableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - self.businessTableView.bounds.size.height
+            
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && self.businessTableView.isDragging) {
+                if (isMoreDataComing) {
+                    isMoreDataLoading = true
+                    offset += 20
+                    print("loading more data")
+                    
+                    let frame = CGRect(x: 0, y: self.businessTableView.contentSize.height, width: self.businessTableView.bounds.size.width, height: InfiniteScrollActivityView.defaultHeight)
+                    self.loadingMoreView?.frame = frame
+                    self.loadingMoreView?.startAnimating()
+                    
+                    SearchUtils.performSearchWith(filter: self.filter, offset: offset, completionHandler: { (newBusinesses, error) in
+                        self.loadingMoreView?.stopAnimating()
+                        self.isMoreDataLoading = false
+                        self.isMoreDataComing = false
+                        if (newBusinesses != nil) {
+                            if (newBusinesses!.count > 0) {
+                                self.isMoreDataComing = true
+                                for business in newBusinesses! {
+                                    self.businesses.append(business)
+                                }
+                                self.filteredBusinesses = self.businesses
+                                self.businessTableView.reloadData()
+                            }
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
     // MARK: - Filters delegate method
     func filtersViewController(filtersViewController: FiltersViewController, didUpdateFilter filter: Filter) {
         self.filter = filter
-        let searchTerm = "Restaurants"
-        let radius = filter.radiusEnum
-        let sort = filter.sortModeEnum
-        let categories = UIConstants.getSelectedCategories(switchStates: filter.categoryStates)
-        let deals = filter.dealsBool
         UIConstants.showLoadingIndicator(view: self.view)
-        Business.searchWithTerm(term: searchTerm, radius: radius!, sort: sort, categories: categories, deals: deals) { (businesses, error) in
+        SearchUtils.performSearchWith(filter: filter, offset: 0) { (businesses, error) in
             UIConstants.dismissLoadingIndicator(view: self.view)
             self.businesses = businesses
             self.filteredBusinesses = businesses
